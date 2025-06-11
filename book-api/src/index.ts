@@ -1,10 +1,18 @@
 import 'dotenv/config'
 import express from 'express'
+import cors from 'cors'
 import mongoose from 'mongoose'
 
 const app = express()
 
+const corsOptions = {
+  origin: 'http://localhost:5173',
+  methods: ['GET', 'POST', 'PATCH', 'DELETE'],
+  credentials: true,  // Allow cookies to be sent
+}
+
 app.use(express.json())
+app.use(cors(corsOptions))
 
 import goalRouter from './routes/bookGoals'  //router for users
 import questionRouter from './routes/question'  //router for books

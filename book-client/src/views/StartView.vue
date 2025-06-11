@@ -11,6 +11,11 @@
             <button>Klicka här!</button>
         </router-link>
     </div>
+    <div class="admin-wrapper">
+      <router-link to="/login">
+        <button>Admin login</button>
+      </router-link>
+    </div>
   </div>
 </template>
 
@@ -37,9 +42,8 @@
   }
 
   .button-wrapper {
-    grid-row: 4;
+    grid-row: 5;
     button {
-        grid-row: 4;
         min-width: 200px;
         min-height: 60px;
         background-color: red;
@@ -53,5 +57,28 @@
         background-color: darkred;
     }
 }
+.admin-wrapper {
+  grid-row: 6;
+  display: flex;
+  justify-content: flex-end; // ⬅️ Lägger knappen till höger
+  align-items: end;
+  margin-bottom: 2rem;
+  margin-right: 2rem;
+
+  button {
+    max-width: 200px;
+    max-height: 60px;
+    background-color: green;
+    text-transform: uppercase;
+    color: white;
+    font-weight: 700;
+    border: none;
+  }
+
+  button:hover {
+    background-color: darkgreen;
+  }
+}
+
 }
 </style>

@@ -1,11 +1,12 @@
 <template>
-  <div>
-    <h2>Tack!</h2>
+  <div class="container">
+      <h2>Klart!</h2>
+      <h2>Tack för ditt bidrag!</h2>
   </div>
 </template>
 
 <style scoped lang="scss">
-div {
+.container {
   display: flex;
   justify-content: center; // Centrera horisontellt
   align-items: flex-start; // Centrera vertikalt
