@@ -1,8 +1,9 @@
 import express from "express";
-import { getSingleQuestion } from "../controllers/questionController";
+import { getAllQuestions, getSingleQuestion  } from "../controllers/questionController";
 
 const router = express.Router();
 
-router.get("/", getSingleQuestion); // GET /api/questions/random
+router.get("/", getAllQuestions);
+router.get('/:id', getSingleQuestion);
 
 export default router;

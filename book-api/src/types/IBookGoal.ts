@@ -4,8 +4,9 @@ export interface IBookGoal {
     name: string;
     age: number;
     bookTitle: string;
-    question: IQuestion[];
+    question: string;
     answer: string;
+    rating: number;
     organisation: string;
     sport: string;
     created_at: Date;

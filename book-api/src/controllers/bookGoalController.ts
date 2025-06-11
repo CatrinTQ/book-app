@@ -1,20 +1,20 @@
 import { Request, Response } from "express";
-import BookGoal from "../models/BookGoal";
+import BookGoal from "../models/Goal";
 
 export const getAllBookGoals = async (_: Request, res: Response) => {
-  
   try {
-    res.json(await BookGoal.find());
-  } catch(error: unknown) {
-    const message = error  instanceof Error ? error.message : 'Unknown error'
-    res.status(500).json({error: message})
+    const goals = await BookGoal.find();
+    res.json(goals);
+  } catch (error: unknown) {
+    const message = error instanceof Error ? error.message : 'Unknown error';
+    res.status(500).json({ error: message });
   }
 }
 
 export const postBookGoal = async (req: Request, res: Response) => {
-    const {name, age, book_title, question, answer, organisation, sport } = req.body
+    const {name, age, bookTitle, rating, question, answer, organisation, sport } = req.body
 
-    if (!name || !age || !book_title || !question || !answer || !organisation || !sport) {
+    if (!name || !age || !bookTitle || !question || !answer || !rating || !organisation || !sport) {
         res.status(400).json({ error: 'All fields are required' });
         return;
     }
@@ -23,9 +23,10 @@ export const postBookGoal = async (req: Request, res: Response) => {
         const bookGoal = new BookGoal({
             name: name,
             age: age,
-            book_title: book_title,
+            bookTitle: bookTitle,
             question: question,
             answer: answer,
+            rating: rating,
             organisation: organisation,
             sport: sport,
         })

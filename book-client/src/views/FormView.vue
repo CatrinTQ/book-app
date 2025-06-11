@@ -1,54 +1,183 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { ref, onMounted } from "vue";
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
+
+const API_URL = import.meta.env.VITE_API_URL;
+
+interface Question {
+  id: string;
+  question: string;
+}
+
+interface Goal {
+  name: string;
+  age: number;
+  bookTitle: string;
+  question: string;
+  answer: string;
+  rating: number;
+  organisation: string;
+  sport: string;
+}
+
+const newGoal = ref<Goal>({
+  name: "",
+  age: 0,
+  bookTitle: "",
+  question: "",
+  answer: "",
+  rating: 0,
+  organisation: "",
+  sport: "",
+});
+
+const postBookGoal = async () => {
+  try {
+    const response = await fetch(`${API_URL}/goals`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(newGoal.value),
+      credentials: "include",
+    });
+
+    if (!response.ok) {
+      throw new Error("Något gick fel vid skapandet av bokmålet");
+    }
+
+    alert("Goal skapat!");
+
+    // Rensa formuläret
+    newGoal.value = {
+      name: "",
+      age: 0,
+      bookTitle: "",
+      question: "",
+      answer: "",
+      rating: 0,
+      organisation: "",
+      sport: "",
+    };
+
+    router.push('/done')
+  } catch (error) {
+    console.error("Error:", error);
+    alert("Kunde inte skapa ntt bokmål.");
+  }
+};
+
+const questions = ref<Question[]>([
+  { id: "1", question: "Vilken karaktär överraskade dig mest?" },
+  { id: "2", question: "Skulle du rekommendera boken till en kompis?" },
+  { id: "3", question: "Vem i boken skulle du vilja ha på ditt lag?" },
+  { id: "4", question: "Vem tycker du var bäst i boken?" },
+  {
+    id: "5",
+    question: "Var det någon du inte gillade i boken? Vem och varför?",
+  },
+  { id: "6", question: "Vilken plats i boken skulle du vilja besöka?" },
+  { id: "7", question: "Vem i boken skulle du helst vilja vara?" },
+  {
+    id: "8",
+    question: "Vad hade du gjort om du hade varit huvudpersonen i boken?",
+  },
+]);
+
+const randomQuestion = ref<Question | null>(null);
+
+onMounted(() => {
+  if (questions.value.length > 0) {
+    const index = Math.floor(Math.random() * questions.value.length);
+    randomQuestion.value = questions.value[index];
+    newGoal.value.question = randomQuestion.value.question;
+  }
+});
+</script>
 
 <template>
   <div class="container">
-    <form>
+    <form @submit.prevent="postBookGoal">
       <label>
         Skriv in ditt namn:
-        <input type="text" id="name" />
+        <input type="text" id="name" v-model="newGoal.name" />
       </label>
       <label>
         Skriv in din ålder:
-        <input type="text" id="age" />
+        <input type="text" id="age" v-model="newGoal.age" />
       </label>
       <label>
         Skriv in titeln på boken du läst:
-        <input type="text" id="bookTitle" />
+        <input type="text" id="bookTitle" v-model="newGoal.bookTitle" />
       </label>
-      <label>
-        En fråga som genereras från databasen:
-        <textarea id="randomQuestion" />
-      </label>
-      <label> Hur många stjärnor får boken? </label>
 
+      <label v-if="randomQuestion">
+        {{ randomQuestion.question }}
+        <textarea id="answer" v-model="newGoal.answer" />
+      </label>
+
+      <label> Hur många stjärnor får boken? </label>
       <div class="rating">
-        <input type="radio" id="star5" name="rating" value="5" />
+        <input
+          type="radio"
+          id="star5"
+          name="rating"
+          value="5"
+          v-model.number="newGoal.rating"
+        />
         <label for="star5" title="5 stjärnor">★</label>
 
-        <input type="radio" id="star4" name="rating" value="4" />
+        <input
+          type="radio"
+          id="star4"
+          name="rating"
+          value="4"
+          v-model.number="newGoal.rating"
+        />
         <label for="star4" title="4 stjärnor">★</label>
 
-        <input type="radio" id="star3" name="rating" value="3" />
+        <input
+          type="radio"
+          id="star3"
+          name="rating"
+          value="3"
+          v-model.number="newGoal.rating"
+        />
         <label for="star3" title="3 stjärnor">★</label>
 
-        <input type="radio" id="star2" name="rating" value="2" />
+        <input
+          type="radio"
+          id="star2"
+          name="rating"
+          value="2"
+          v-model.number="newGoal.rating"
+        />
         <label for="star2" title="2 stjärnor">★</label>
 
-        <input type="radio" id="star1" name="rating" value="1" />
+        <input
+          type="radio"
+          id="star1"
+          name="rating"
+          value="1"
+          v-model.number="newGoal.rating"
+        />
         <label for="star1" title="1 stjärna">★</label>
       </div>
 
       <label>
         Mitt läsmål går till
-        <input type="text" id="readGoalSportsClub" />
+        <input
+          type="text"
+          id="readGoalSportsClub"
+          v-model="newGoal.organisation"
+        />
       </label>
       <label>
         Sport:
-        <input type="text" id="readGoalSport" />
+        <input type="text" id="readGoalSport" v-model="newGoal.sport" />
       </label>
-      <router-link to="/done">
-        <input type="button" value="Skicka in läsmål" />
-      </router-link>
+
+      <button type="submit">Skicka in läsmål</button>
     </form>
   </div>
 </template>
@@ -144,5 +273,4 @@
 .rating label:hover ~ label {
   color: gold;
 }
-
 </style>

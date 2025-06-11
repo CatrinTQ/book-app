@@ -3,10 +3,6 @@ import mongoose from "mongoose";
 const Schema = mongoose.Schema;
 
 const QuestionSchema = new Schema({
-    _id: {
-      type: String,
-      required: true
-    },
     question: {
       type: String,
       required: true
@@ -14,4 +10,4 @@ const QuestionSchema = new Schema({
   });
   
   
-  export default mongoose.model('Questions', QuestionSchema);
+  export default mongoose.model('Question', QuestionSchema, 'questions');
