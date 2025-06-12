@@ -198,6 +198,7 @@ onMounted(() => {
     display: flex;
     flex-direction: column;
     gap: 1rem;
+    margin-top: 1rem;
 
   }
 
