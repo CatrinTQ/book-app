@@ -1,55 +1,14 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
-import { useRouter } from 'vue-router'
-import useAuthStore from '../stores/useAuthStore'
+import { ref } from "vue";
+import { useRouter } from "vue-router";
+import useAuthStore from "../stores/useAuthStore";
 
-const useAuth = useAuthStore()
-const router = useRouter()
+const useAuth = useAuthStore();
+const router = useRouter();
 
-const username = ref('')
-const password = ref('')
-const loginError = ref('')
-const users = ref<User[]>([])
-
-interface User {
-  _id: number
-  username: string
-  password: string
-  isAdmin: boolean
-}
-
-/* -------------------------------------------------------------------------- */
-/*                                 Fetch users                                */
-/* -------------------------------------------------------------------------- */
-
-/**
- * Fetch user data from db for logged inadmin users
- */
- const fetchUsers = async () => {
-  try {
-    const token = useAuth.token
-
-    const response = await fetch(`${import.meta.env.VITE_API_URL}/users`, {
-      method: 'GET',
-      headers: {
-        'Authorization': `Bearer ${token}`,
-      },
-    })
-
-    if (!response.ok) {
-      throw new Error('Something went wrong when fetching users')
-    }
-
-    const data: User[] = await response.json()
-    users.value = data
-  } catch (error) {
-    console.error('Error fetching users:', error)
-  }
-}
-
-onMounted(() => {
-    fetchUsers()
-})
+const username = ref("");
+const password = ref("");
+const loginError = ref("");
 
 /* -------------------------------------------------------------------------- */
 /*                                   Log in                                   */
@@ -60,25 +19,22 @@ onMounted(() => {
  * If succses, show admin panel if admin
  * or redirect to /books if not admin.
  */
- const handleLogin = async () => {
+const handleLogin = async () => {
   try {
-    await useAuth.login(username.value, password.value)
+    await useAuth.login(username.value, password.value);
 
     if (useAuth.isAuthenticated) {
       if (useAuth.isAdmin) {
-        await fetchUsers() // Körs efter att token satts
-      } else {
-        router.push('/goals')
+        router.push("/goals");
       }
     } else {
-      loginError.value = 'Invalid username or password'
+      loginError.value = "Invalid username or password";
     }
   } catch (err) {
-    loginError.value = 'Login failed'
-    console.error(err)
+    loginError.value = "Login failed";
+    console.error(err);
   }
-}
-
+};
 </script>
 
 <template>
@@ -94,7 +50,7 @@ onMounted(() => {
           <label for="login-password">Password:</label>
           <input type="password" id="login-password" v-model="password" />
         </div>
-            <button type="submit">Log In</button>
+        <button type="submit">Log In</button>
       </form>
     </div>
   </div>

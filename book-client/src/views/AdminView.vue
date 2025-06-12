@@ -1,5 +1,10 @@
 <script setup lang="ts">
 import { onMounted, ref } from "vue";
+import { useRouter } from "vue-router";
+import useAuthStore from "../stores/useAuthStore";
+
+const router = useRouter();
+const useAuth = useAuthStore();
 
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -18,7 +23,10 @@ const goals = ref<Goal[]>([]);
 
 const fetchAllGoals = async (): Promise<void> => {
   try {
-    const response = await fetch(`${API_URL}/goals`);
+    const response = await fetch(`${API_URL}/goals`, {
+      credentials: "include",
+    });
+
     if (!response.ok) {
       throw new Error("Something went wrong when fetching goals");
     }
@@ -29,13 +37,22 @@ const fetchAllGoals = async (): Promise<void> => {
   }
 };
 
+const handleLogout = async () => {
+  try {
+    await useAuth.logout()
+    router.push('/')
+  } catch (err) {
+    console.error('Logout failed:', err)
+  }
+}
+
 onMounted(fetchAllGoals);
 </script>
 
 <template>
   <div class="goal-list">
     <div class="button-wrapper">
-        <button>Log out</button>
+      <button @click="handleLogout" to="/">Log out</button>
     </div>
     <h2>Bokmål</h2>
     <div v-if="goals.length === 0">
