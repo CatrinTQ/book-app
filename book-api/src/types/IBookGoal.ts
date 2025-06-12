@@ -1,5 +1,3 @@
-import { IQuestion } from "./IQuestion";
-
 export interface IBookGoal {
     name: string;
     age: number;

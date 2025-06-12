@@ -2,6 +2,8 @@ import 'dotenv/config'
 import express from 'express'
 import cors from 'cors'
 import mongoose from 'mongoose'
+import cookieParser from 'cookie-parser';
+
 
 const app = express()
 
@@ -14,11 +16,13 @@ const corsOptions = {
 app.use(express.json())
 app.use(cors(corsOptions))
 
+app.use(cookieParser());
+
 import goalRouter from './routes/bookGoals'  //router for users
-import questionRouter from './routes/question'  //router for books
+import authRouter from './routes/auth'
 
 app.use('/goals', goalRouter)
-app.use('/questions', questionRouter)
+app.use('/auth', authRouter)
 
 console.log("MONGODB_URL = ", process.env.MONGODB_URI)
 
