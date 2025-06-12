@@ -1,15 +1,15 @@
 <script setup lang="ts"></script>
 
 <template>
-  <div class="container">
+  <div class="start-container">
     <div class="text">
       <h2>Har du läst en bok?</h2>
       <h2>Gör ett läsmål!</h2>
     </div>
     <div class="button-wrapper">
-        <router-link to="/form">
-            <button>Klicka här!</button>
-        </router-link>
+      <router-link to="/form">
+        <button>Klicka här!</button>
+      </router-link>
     </div>
     <div class="admin-wrapper">
       <router-link to="/login">
@@ -20,65 +20,68 @@
 </template>
 
 <style lang="scss">
-.container {
+.start-container {
   display: grid;
+  grid-template-rows: repeat(4, 1fr);
   background-image: url(../assets/bg-football.png);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  min-width: 100vw;
-  min-height: 100vh;
+  width: 100vw;
+  height: 100vh;
 
   .text {
     text-align: left;
-    margin-left: 2rem;
-
+    margin-left: 1rem;
+    margin-top: 1rem;
     h2 {
-    display: inline-block;
-    background-color: black;
-    color: white;
-    padding: 0 4px;
+      display: inline-block;
+      background-color: black;
+      color: white;
+      padding: 0 4px;
     }
   }
 
   .button-wrapper {
-    grid-row: 5;
+    display: flex;
+    justify-content: center;
+    grid-row: 3;
+
     button {
-        min-width: 200px;
-        min-height: 60px;
-        background-color: red;
-        text-transform: uppercase;
-        border-radius: 30px;
-        color: white;
-        font-weight: 700;
-        border: none;
+      min-width: 200px;
+      min-height: 60px;
+  border-radius: 30px;
+
+      background-color: red;
     }
     button:hover {
-        background-color: darkred;
+      background-color: darkred;
     }
-}
-.admin-wrapper {
-  grid-row: 6;
-  display: flex;
-  justify-content: flex-end; // ⬅️ Lägger knappen till höger
-  align-items: end;
-  margin-bottom: 2rem;
-  margin-right: 2rem;
-
-  button {
-    max-width: 200px;
-    max-height: 60px;
-    background-color: green;
-    text-transform: uppercase;
-    color: white;
-    font-weight: 700;
-    border: none;
   }
 
-  button:hover {
-    background-color: darkgreen;
+  .admin-wrapper {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    margin-bottom: 1rem;
+    margin-right: 1rem;
+    grid-row: 4;
+
+    button {
+      background-color: green;
+      padding: 1rem;
+    }
+    button:hover {
+      background-color: darkgreen;
+    }
   }
 }
 
+button {
+  text-transform: uppercase;
+  color: white;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
 }
 </style>

@@ -88,18 +88,22 @@ const handleLogin = async () => {
       label {
         text-align: right;
         width: 110px;
+        color: white;
       }
     }
 
     button {
-      max-width: 200px;
-      max-height: 60px;
+      min-width: 100px;
+      min-height: 40px;
       background-color: green;
       text-transform: uppercase;
       color: white;
       font-weight: 700;
       border: none;
       margin: 1rem;
+    }
+    button:hover {
+        background-color: darkgreen;
     }
   }
 }

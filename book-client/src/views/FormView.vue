@@ -96,7 +96,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="container">
+  <div class="form-container">
     <form @submit.prevent="postBookGoal">
       <label>
         Skriv in ditt namn:
@@ -183,10 +183,10 @@ onMounted(() => {
 </template>
 
 <style scoped lang="scss">
-.container {
+.form-container {
   display: flex;
-  justify-content: center; // Centrera horisontellt
-  align-items: center; // Centrera vertikalt
+  justify-content: center;
+  align-items: center;
   background-image: url(../assets/bg-football.png);
   background-size: cover;
   background-position: center;
@@ -198,10 +198,17 @@ onMounted(() => {
     display: flex;
     flex-direction: column;
     gap: 1rem;
+
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
     padding: 2rem;
+    background-color: #f9f9f9;
     width: 100%; // Flexibelt
     max-width: 500px; // Begränsad bredd
-    background-color: #f9f9f9;
     border-radius: 8px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     font-family: sans-serif;
@@ -231,8 +238,9 @@ onMounted(() => {
     }
   }
 
-  input[type="button"] {
-    min-width: 200px;
+  button {
+    align-self: center;
+    width: 200px;
     min-height: 60px;
     background-color: #007acc;
     text-transform: uppercase;

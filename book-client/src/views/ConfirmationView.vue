@@ -1,12 +1,12 @@
 <template>
-  <div class="container">
+  <div class="confirmation-container">
       <h2>Klart!</h2>
       <h2>Tack för ditt bidrag!</h2>
   </div>
 </template>
 
 <style scoped lang="scss">
-.container {
+.confirmation-container {
   display: flex;
   justify-content: center; // Centrera horisontellt
   align-items: flex-start; // Centrera vertikalt

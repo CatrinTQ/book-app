@@ -74,6 +74,11 @@ onMounted(fetchAllGoals);
 </template>
 
 <style lang="scss" scoped>
+.goal-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 .goal-item {
   padding: 1rem;
   background: #f3f3f3;
@@ -87,9 +92,7 @@ ul {
 }
 
 .button-wrapper {
-  grid-row: 6;
-  display: flex;
-  justify-content: flex-end; // ⬅️ Lägger knappen till höger
+  align-self: flex-end;
   align-items: end;
   margin-top: 1rem;
   margin-right: 1rem;
@@ -97,6 +100,7 @@ ul {
   button {
     max-width: 150px;
     max-height: 60px;
+    padding: 1rem;
     background-color: darkred;
     text-transform: uppercase;
     color: white;
