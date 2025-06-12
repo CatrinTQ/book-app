@@ -8,7 +8,7 @@ import cookieParser from 'cookie-parser';
 const app = express()
 
 const corsOptions = {
-  origin: 'https://book-api-indol.vercel.app/',
+  origin: 'https://book-client-xi.vercel.app/login',
 //  origin: 'http://localhost:5173',
   methods: ['GET', 'POST', 'PATCH', 'DELETE'],
   credentials: true,  // Allow cookies to be sent
