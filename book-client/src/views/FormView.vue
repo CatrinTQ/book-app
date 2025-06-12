@@ -165,7 +165,7 @@ onMounted(() => {
       </div>
 
       <label>
-        Mitt läsmål går till
+        Mitt läsmål går till den här klubben:
         <input
           type="text"
           id="readGoalSportsClub"
@@ -198,7 +198,7 @@ onMounted(() => {
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    margin-top: 1rem;
+    margin-top: 2rem;
 
   }
 
