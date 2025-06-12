@@ -8,7 +8,7 @@
     </div>
     <div class="button-wrapper">
       <router-link to="/form">
-        <button>Klicka här!</button>
+        <button>Gör mål!</button>
       </router-link>
     </div>
     <div class="admin-wrapper">

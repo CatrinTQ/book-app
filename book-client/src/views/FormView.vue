@@ -63,7 +63,7 @@ const postBookGoal = async () => {
     router.push('/done')
   } catch (error) {
     console.error("Error:", error);
-    alert("Kunde inte skapa ntt bokmål.");
+    alert("Kunde inte skapa nytt bokmål.");
   }
 };
 
